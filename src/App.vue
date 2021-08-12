@@ -1,15 +1,58 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
+    <Tasks @delete-task="deleteTask" :tasks="tasks" />
   </div>
 </template>
 
 <script lang="ts">
 import Header from "./components/Header.vue";
+import Tasks from "./components/Tasks.vue";
+// interface task {
+//   id: Number;
+//   day: String;
+//   text: String;
+//   reminder: Boolean;
+// }
 
 export default {
   name: "App",
-  components: { Header }
+  components: { Header, Tasks },
+  data() {
+    return {
+      tasks: []
+    };
+  },
+  methods: {
+    deleteTask(id: Number) {
+      (this as any).tasks = (this as any).tasks.filter(
+        (task: any) => task.id !== id
+      );
+      console.log(id);
+    }
+  },
+  created() {
+    (this as any).tasks = [
+      {
+        id: 1,
+        text: "task1",
+        day: "March 1st at 2:30pm",
+        reminder: true
+      },
+      {
+        id: 2,
+        text: "doctur",
+        day: "March 1st at 2:30pm",
+        reminder: true
+      },
+      {
+        id: 3,
+        text: "legu",
+        day: "March 1st at 2:30pm",
+        reminder: true
+      }
+    ];
+  }
 };
 </script>
 
